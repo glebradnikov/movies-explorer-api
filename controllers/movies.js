@@ -48,15 +48,14 @@ module.exports.createMovie = (request, response, next) => {
     })
     .catch((error) => {
       if (error.name === 'ValidationError') {
-        next(
+        return next(
           new BadRequestError(
             'Переданы некорректные данные при создании фильма'
           )
         );
-        return;
       }
 
-      next(error);
+      return next(error);
     });
 };
 
@@ -68,11 +67,10 @@ module.exports.deleteMovie = (request, response, next) => {
     .orFail(new NotFoundError('Фильм с указанным _id не найден'))
     .then((movie) => {
       if (movie.owner.valueOf() !== _id) {
-        next(new ForbiddenError('Попытка удалить чужой фильм'));
-        return;
+        return next(new ForbiddenError('Попытка удалить чужой фильм'));
       }
 
-      Movie.deleteOne()
+      return Movie.deleteOne()
         .then(() => {
           response.send({ movie });
         })
@@ -80,12 +78,11 @@ module.exports.deleteMovie = (request, response, next) => {
     })
     .catch((error) => {
       if (error.name === 'CastError') {
-        next(
+        return next(
           new BadRequestError('Переданы некорректные данные для удалении фильм')
         );
-        return;
       }
 
-      next(error);
+      return next(error);
     });
 };
