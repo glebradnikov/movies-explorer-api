@@ -10,6 +10,7 @@ const { signIn, signOut, signUp } = require('./controllers/users');
 const usersRoutes = require('./routes/users');
 const moviesRoutes = require('./routes/movies');
 const auth = require('./middlewares/auth');
+const cors = require('./middlewares/cors');
 const errorHandling = require('./middlewares/error-handling');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { validateSignIn, validateSignUp } = require('./middlewares/validators');
@@ -29,6 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(cookieParser());
 app.use(limiter);
+app.use(cors);
 app.use(requestLogger);
 
 app.post('/signin', validateSignIn, signIn);
