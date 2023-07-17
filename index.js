@@ -8,6 +8,7 @@ const auth = require('./middlewares/auth');
 const errorHandling = require('./middlewares/error-handling');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { PORT, URL } = require('./utils/constants');
+const NotFoundError = require('./errors/not-found-error');
 
 const app = express();
 
@@ -27,6 +28,9 @@ app.post('/signout', signOut);
 
 app.use('/users', usersRoutes);
 app.use('/movies', moviesRoutes);
+app.use((request, response, next) => {
+  next(new NotFoundError('Неправильный путь запрашиваемой страницы'));
+});
 app.use(errorLogger);
 app.use(errorHandling);
 
