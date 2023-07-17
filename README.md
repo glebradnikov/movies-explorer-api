@@ -6,4 +6,4 @@ API для аутентификации пользователей и сохра
 
 ## Ссылка на проект
 
-https://api.mesto.glebradnikov.nomoreparties.sbs
+https://api.movie-explorer.nomoredomains.xyz

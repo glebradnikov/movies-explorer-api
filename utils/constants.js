@@ -12,10 +12,10 @@ module.exports.URL_REGEX =
   /https?:\/\/(www\.)?[a-zA-Z0-9-]+\.[\w\-.~:\/?#[\]@!$&'()*+,;=]+/;
 
 module.exports.ALLOWED_CORS = [
-  'http://movies-explorer.glebradnikov.nomoreparties.sbs',
-  'https://movies-explorer.glebradnikov.nomoreparties.sbs',
-  'http://api.movies-explorer.glebradnikov.nomoreparties.sbs',
-  'https://api.movies-explorer.glebradnikov.nomoreparties.sbs',
+  'http://movie-explorer.nomoredomains.xyz',
+  'https://movie-explorer.nomoredomains.xyz',
+  'http://api.movie-explorer.nomoredomains.xyz',
+  'https://api.movie-explorer.nomoredomains.xyz',
   'http://localhost:3000',
   'https://localhost:3000',
 ];
