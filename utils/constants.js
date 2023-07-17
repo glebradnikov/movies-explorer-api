@@ -1,11 +1,11 @@
 const {
-  PORT = 3000,
-  URL = 'mongodb://127.0.0.1:27017/bitfilmsdb',
   NODE_ENV,
   JWT,
+  PORT = 3000,
+  URL = 'mongodb://127.0.0.1:27017/bitfilmsdb',
 } = process.env;
 
-module.exports = { PORT, URL, NODE_ENV, JWT };
+module.exports = { NODE_ENV, JWT, PORT, URL };
 
 module.exports.URL_REGEX =
   // eslint-disable-next-line no-useless-escape

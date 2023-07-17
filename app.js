@@ -7,8 +7,7 @@ const helmet = require('helmet');
 const expressRateLimit = require('express-rate-limit');
 const { errors } = require('celebrate');
 const { signIn, signOut, signUp } = require('./controllers/users');
-const usersRoutes = require('./routes/users');
-const moviesRoutes = require('./routes/movies');
+const routes = require('./routes/index');
 const auth = require('./middlewares/auth');
 const cors = require('./middlewares/cors');
 const errorHandling = require('./middlewares/error-handling');
@@ -40,8 +39,8 @@ app.use(auth);
 
 app.post('/signout', signOut);
 
-app.use('/users', usersRoutes);
-app.use('/movies', moviesRoutes);
+app.use('/users', routes);
+app.use('/movies', routes);
 app.use((request, response, next) => {
   next(new NotFoundError('Неправильный путь запрашиваемой страницы'));
 });
