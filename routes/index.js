@@ -1,23 +1,25 @@
 const express = require('express');
-const { getUser, updateUser } = require('../controllers/users');
-const {
-  getMovies,
-  createMovie,
-  deleteMovie,
-} = require('../controllers/movies');
-const {
-  validateUser,
-  validateMovie,
-  validateMovieId,
-} = require('../middlewares/validators');
+const userRoutes = require('./users');
+const movieRoutes = require('./movies');
+const { signIn, signOut, signUp } = require('../controllers/users');
+const auth = require('../middlewares/auth');
+const { validateSignIn, validateSignUp } = require('../middlewares/validators');
+const { NOT_FOUND_ERROR } = require('../utils/constants');
+const NotFoundError = require('../errors/not-found-error');
 
 const router = express.Router();
 
-router.get('/me', getUser);
-router.patch('/me', validateUser, updateUser);
+router.post('/signin', validateSignIn, signIn);
+router.post('/signup', validateSignUp, signUp);
 
-router.get('/', getMovies);
-router.post('/', validateMovie, createMovie);
-router.delete('/:movieId', validateMovieId, deleteMovie);
+router.use(auth);
+
+router.post('/signout', signOut);
+
+router.use('/users', userRoutes);
+router.use('/movies', movieRoutes);
+router.use((request, response, next) => {
+  next(new NotFoundError(NOT_FOUND_ERROR));
+});
 
 module.exports = router;
